@@ -9,8 +9,8 @@ logger = get_logger(__name__)
 @dataclass
 class GameSettings:
     FREE_SPACE = "."
-    CROSS = "❌"
-    ZERO = "0️⃣"
+    CROSS = "X"
+    ZERO = "O"
     CONTINUE = 0
     FINISH = 1
     CROSS_SP = "❎"
@@ -117,7 +117,7 @@ def verify_winner(field: list[list[str]]) -> Union[GameText, WinnerPos]:
         return GameText.BOT_WON, ("diag", 0)
 
     if field[0][2] == field[1][1] == field[2][0] and field[0][2] != GameSettings.FREE_SPACE:
-        if field[0][0] == GameSettings.CROSS:
+        if field[0][2] == GameSettings.CROSS:
             logger.debug("User won on diag 1")
             return GameText.USER_WON, WinnerPos("diag", 1)
         logger.debug("Bot won on diag 1")
